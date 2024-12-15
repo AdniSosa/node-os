@@ -9,8 +9,8 @@ function myPC () {
     const osVersion = os.release(); //versión del SO
     const osPro = os.arch(); //Arquitectura
     const cpus = os.cpus().length; //CPUs
-    const osMemory = os.totalmem() / 1000000;
-    const osFreeMemory = os.freemem() / 1000000;
+    const osMemory = `${(os.totalmem() / 1000000).toFixed(2)} MB`;
+    const osFreeMemory = `${(os.freemem() / 1000000).toFixed(2)} MB`;
     //console.log(osFreeMemory);
 
     return {
@@ -24,4 +24,6 @@ function myPC () {
     }
 }
 
-console.log(myPC());
+//console.log(myPC());
+
+module.exports = myPC;
