@@ -8,62 +8,45 @@ function myInterfaces () {
     //console.log(interfaces);
     //console.log(Object.entries(interfaces)[0][0]);
     
-    //! 1ERA INTERFAZ
-    const interface1 = Object.entries(interfaces)[0]; //? Obtengo un array de objetos de la primera interfaz
+    //? Obtengo un array de objetos de cada interfaz
+    const interface1 = Object.entries(interfaces)[0]; 
+    const interface2 = Object.entries(interfaces)[1];
 
-    //*Wifi1
-    const interface1Name = interface1[0]; //?Obtengo el nombre de la primera interface
-    interface1.shift();
-    //console.log(interface1);
+    //?Obtengo el nombre de cada interface
+    const interface1Name = interface1[0]; 
+    const interface2Name = interface2[0];
+    //console.log(interfaces);
+
+    //?Obtengo los arrays de cada interface
+    const interface1Array = interface1[1];
+    const interface2Array = interface2[1];
 
     let allInterfaces = [];
-    
-    for (const interfaceWifiArrays of interface1) {
-        for (const interfaceWifi of interfaceWifiArrays) {
-            const wifiFamily = interfaceWifi.family;
-            const wifiAddress = interfaceWifi.address;
-            const wifiInternal = interfaceWifi.internal;
-            //console.log(wifiInternal);
-            let wifiInterface = {
-                Interface: interface1Name,
-                Familia: wifiFamily,
-                Dirección: wifiAddress,
-                Interno: wifiInternal
-            }
-            allInterfaces.push(wifiInterface);
+
+    //! 1ERA INTERFAZ
+    for (const interfaceWifiArrays of interface1Array) {
+        //console.log(interfaceWifiArrays);
+        let wifiInterface = {
+            Interface: interface1Name,
+            Familia: interfaceWifiArrays.family,
+            Dirección: interfaceWifiArrays.address,
+            Interno: interfaceWifiArrays.internal
         }
-        
+        allInterfaces.push(wifiInterface);
     }
   
     //! 2DA INTERFAZ
-    //* Loopback Pseudo-Interface 1
-    const interface2 = Object.entries(interfaces)[1]; //? Obtengo un array de objetos de la segunda interfaz
-    //console.log(interface2);
-    
-    const interface2Name = interface2[0]; //?Obtengo el nombre de la primera interface
-    interface2.shift();
-    //console.log(interface2);
-    
-    for (const interfaceLoopbackArrays of interface2) {
-        for (const interfaceLoopback of interfaceLoopbackArrays) {
-            const loopbackFamily = interfaceLoopback.family;
-            const loopbackAddress = interfaceLoopback.address;
-            const loopbackInternal = interfaceLoopback.internal;
-            //console.log(wifiInternal);
-            let loopbackInterface = {
-                Interface: interface2Name,
-                Familia: loopbackFamily,
-                Dirección: loopbackAddress,
-                Interno: loopbackInternal
-            }
-            allInterfaces.push(loopbackInterface);
+    for (const interfaceLoopbackArrays of interface2Array) {
+        let loopbackInterface = {
+            Interface: interface2Name,
+            Familia: interfaceLoopbackArrays.family,
+            Dirección: interfaceLoopbackArrays.address,
+            Interno: interfaceLoopbackArrays.internal
         }
-        
+        allInterfaces.push(loopbackInterface);
     }
-    
     return allInterfaces;
 }   
 
-//console.log(myInterfaces());
-
+//myInterfaces();
 module.exports = myInterfaces;
